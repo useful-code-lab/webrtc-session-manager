@@ -5,6 +5,10 @@
 В данном случае Postgresql будет установлен на компьютер.
 Для базы данных создана простейшая таблица:
 ```SQL
+postgres=# create database my_app_db
+postgres-# ;
+CREATE DATABASE
+
 my_app_db=# create table sessions (
 id SERIAL PRIMARY KEY,
 user_id integer,
