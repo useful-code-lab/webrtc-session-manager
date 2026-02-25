@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	httpTransport "sessions/internal/http"
@@ -24,5 +25,7 @@ func main() {
 	sessionService := service.New(pg)
 	handler := httpTransport.New(sessionService)
 
-	log.Fatal(fasthttp.ListenAndServe(":8080", httpTransport.Router(handler)))
+	fmt.Println(fasthttp.ListenAndServe(":8080", httpTransport.Router(handler)))
+
+	fmt.Println("Сервер запустился успешно2")
 }

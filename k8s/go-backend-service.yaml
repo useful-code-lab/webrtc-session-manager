@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-backend
+  namespace: go-webrtc
+spec:
+  selector:
+    app: go-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer  # Это позволяет создать внешний доступ, если используется облачный провайдер

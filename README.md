@@ -26,3 +26,10 @@ my_app_db=# \d sessions
 Indexes:
     "sessions_pkey" PRIMARY KEY, btree (id)
 
+## Сборка и запуск Docker-образа
+- Сборка проекта
+```bash
+ docker build -t go-webrtc-backend .
+```
+
+
