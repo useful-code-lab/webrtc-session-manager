@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Project",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go", 
+            "env": {
+                "DATABASE_URL": "postgres://go_user:123@localhost:5432/my_app_db"
+            },
+            "args": []
+        }
+    ]
+}
