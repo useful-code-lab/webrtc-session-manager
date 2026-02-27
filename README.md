@@ -1,36 +1,16 @@
-Задача:
-Создать программу на go которая создаёт сессии в Postgresql. Создать для этого GRPC-сервер. Сделать взаимодействие  сложных структур и интерфейсов 
-
-## Реализация
-В данном случае Postgresql будет установлен на компьютер.
-Для базы данных создана простейшая таблица:
-```SQL
-postgres=# create database my_app_db
-postgres-# ;
-CREATE DATABASE
-
-my_app_db=# create table sessions (
-id SERIAL PRIMARY KEY,
-user_id integer,
-active boolean default true)
-;
-```
-Получилась такая таблица:
-my_app_db=# \d sessions
-                             Table "public.sessions"
- Column  |  Type   | Collation | Nullable |               Default                
----------+---------+-----------+----------+--------------------------------------
- id      | integer |           | not null | nextval('sessions_id_seq'::regclass)
- user_id | integer |           |          | 
- active  | boolean |           |          | true
-Indexes:
-    "sessions_pkey" PRIMARY KEY, btree (id)
-
-## Сборка и запуск Docker-образа
-- Сборка проекта
-```bash
- docker build -t go-webrtc-backend .
-```
+Название: Go-WebRTC Session Manager
+Архитектура и компоненты:
+Backend (Golang): Легковесный сервис, использующий фреймворк fasthttp для достижения минимальных задержек. Реализован роутинг для управления жизненным циклом сессий (эндпоинт /session/start). Бизнес-логика вынесена в слой internal/service.
+Database (PostgreSQL 13): Реляционное хранилище для хранения данных о сессиях (таблица sessions). Инициализация структуры БД происходит автоматически при первом запуске через ConfigMap и SQL-скрипты.
+Инфраструктура (Kubernetes/MicroK8s):
+Deployment: Обеспечивает отказоустойчивость и декларативное состояние подов.
+Networking: Использование MetalLB для предоставления выделенного External-IP в локальной сети, что позволяет обращаться к сервису как к реальному серверу.
+Configuration: Разделение конфигов (ConfigMap) и секретных данных (Secrets) для безопасного управления учетными данными базы данных.
+Ключевые особенности:
+Контейнеризация без демона Docker (использование Podman).
+Автоматическая инициализация схемы БД при деплое.
+Минимальное потребление ресурсов благодаря компиляции Go в бинарный файл внутри Alpine-образа.
+Локальный цикл разработки с прямым импортом образов в containerd кластера MicroK8s.
 
 ## Выполнение строки запроса
 ```bash
