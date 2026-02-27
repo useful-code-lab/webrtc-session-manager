@@ -1,5 +1,7 @@
 # Stage 1: Сборка
-FROM golang:1.25-alpine AS build
+FROM docker.io/library/golang:1.24-alpine AS build
+
+
 WORKDIR /app
 # Сначала копируем файлы модулей для кэширования слоев
 COPY go.mod go.sum ./

@@ -32,4 +32,14 @@ Indexes:
  docker build -t go-webrtc-backend .
 ```
 
+## Выполнение строки запроса
+```bash
+curl -v -X POST http://10.64.140.43      -d "id=102"      -d "user=ivan"
+```
+
+## Просмотр содержимого таблицы
+```bash
+sudo microk8s kubectl exec -it -n go-webrtc deployment/postgres -- psql -U go_user -d my_app_db -c "SELECT * FROM sessions;"
+```
+
 

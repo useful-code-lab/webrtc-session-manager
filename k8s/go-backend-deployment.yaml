@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: go-backend
-        image: go-webrtc-backend:latest  # Убедитесь, что у вас актуальный образ
+        image: localhost/go-webrtc-backend:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         env:
